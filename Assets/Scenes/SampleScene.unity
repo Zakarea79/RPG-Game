@@ -359,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5164787238437674691, guid: 908cb31031a807e43bbbfe43f79061d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.24
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5164787238437674691, guid: 908cb31031a807e43bbbfe43f79061d4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -367,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5164787238437674691, guid: 908cb31031a807e43bbbfe43f79061d4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.97
+      value: 2.24
       objectReference: {fileID: 0}
     - target: {fileID: 5164787238437674691, guid: 908cb31031a807e43bbbfe43f79061d4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1522,6 +1522,7 @@ MonoBehaviour:
   Speed: 5
   animPlayer: {fileID: 1897209352}
   LenSword: 0.5
+  JumpBase: {x: 0, y: 0, z: 0}
 --- !u!143 &1459892797
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1533,8 +1534,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.57
-  m_Radius: 0.4
+  m_Height: 1.6
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.0001

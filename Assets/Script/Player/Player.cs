@@ -16,14 +16,15 @@ public class Player : MonoBehaviour
 	
 	internal bool AttakAction = false;
 	
-	// Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.
 	protected void Start()
 	{
 		characterController = gameObject.GetComponent<CharacterController>();
 		RaycastHit hit;
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit) && JumpControl == false)
+		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
 		{
-			JumpBase = hit.transform.position;
+			JumpBase = hit.point;
+			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.green);
+			print(hit.transform.name);
 		}
 	}
 	
@@ -45,9 +46,11 @@ public class Player : MonoBehaviour
 		{
 			animPlayer.SetTrigger("normalJamp");
 			RaycastHit hit;
-			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit) && JumpControl == false)
+			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
 			{
-				JumpBase = hit.transform.position;
+				JumpBase = hit.point;
+				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.green);
+				print(hit.transform.name);
 			}
 		}
 		//------------------------------------------Debug-----------------------------------------------------------------------
@@ -73,7 +76,7 @@ public class Player : MonoBehaviour
 		animPlayer.applyRootMotion = ChackPlayAnim("attak3");
 		AttakAction = StatuseAnimitonAttack() == false ? true : false;
 		
-		if(Vector3.Distance(new Vector3(0 , transform.position.y , 0) , new Vector3(0 , JumpBase.y ,0)) > 3)
+		if(Vector3.Distance(new Vector3(0 , JumpBase.y ,0) , new Vector3(0 , transform.position.y , 0)) > 3)
 		{
 			jumpspeed = -2;
 		}
