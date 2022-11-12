@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 	
 	public float LenSword = .5f;
 	
-	private float jumpspeed = 0;
+	private float jumpspeed = -2;
 	private Vector3 JumpBase;
 	private CharacterController characterController;
 	private bool JumpControl = false;
@@ -20,7 +20,11 @@ public class Player : MonoBehaviour
 	protected void Start()
 	{
 		characterController = gameObject.GetComponent<CharacterController>();
-		
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit) && JumpControl == false)
+		{
+			JumpBase = hit.transform.position;
+		}
 	}
 	
     void Update()
@@ -61,11 +65,15 @@ public class Player : MonoBehaviour
 		{
 			animPlayer.SetInteger("Attak" , 4);
 		}
+		else if(ZInput.GetKeyDown("cattak") && StatuseAnimitonAttack())
+		{
+			animPlayer.SetInteger("Attak" , 5);
+		}
 		
 		animPlayer.applyRootMotion = ChackPlayAnim("attak3");
 		AttakAction = StatuseAnimitonAttack() == false ? true : false;
 		
-		if(Vector3.Distance(new Vector3(0,transform.position.y , 0) , new Vector3(0 , JumpBase.y ,0)) > 3)
+		if(Vector3.Distance(new Vector3(0 , transform.position.y , 0) , new Vector3(0 , JumpBase.y ,0)) > 3)
 		{
 			jumpspeed = -2;
 		}

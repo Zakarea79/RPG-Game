@@ -17,7 +17,7 @@ public class Sword : MonoBehaviour
 		{	
 			if(player.AttakAction && hit.transform.CompareTag("Enemy"))
 			{
-				hit.transform.GetComponent<Enemy>().HP = 1;
+				hit.transform.GetComponent<Enemy>().HP = 10;
 			}
 	    }
     }
