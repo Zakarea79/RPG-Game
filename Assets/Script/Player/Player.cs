@@ -7,13 +7,14 @@ public class Player : MonoBehaviour
 	[SerializeField] private float Speed = 10f;
 	[SerializeField] private Animator animPlayer;
 	
-	public float LenSword = .5f;
 	
+	[SerializeField] GameObject test;
+	
+	public float LenSword = .5f;
 	private float jumpspeed = -2;
 	private Vector3 JumpBase;
 	private CharacterController characterController;
 	private bool JumpControl = false;
-	
 	internal bool AttakAction = false;
 	
 	protected void Start()
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
 		{
 			JumpBase = hit.point;
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.green);
-			print(hit.transform.name);
+			//print(hit.transform.name);
 		}
 	}
 	
@@ -50,7 +51,7 @@ public class Player : MonoBehaviour
 			{
 				JumpBase = hit.point;
 				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.green);
-				print(hit.transform.name);
+				//print(hit.transform.name);
 			}
 		}
 		//------------------------------------------Debug-----------------------------------------------------------------------
@@ -93,6 +94,9 @@ public class Player : MonoBehaviour
 		}
 		characterController.Move((new Vector3(-ymove, jumpspeed ,xmove) * Speed * Time.deltaTime));
 	}
+	
+	public void FierFlay(int input){ transform.GetChild(5).GetComponent<SphereCollider>().radius = input;}
+	
 	public void SetJumpControl(int statuse){JumpControl = System.Convert.ToBoolean(statuse);if(JumpControl == true) jumpspeed = 2;}
     
 	public void reseatattak(){animPlayer.SetInteger("Attak" , 0);}
