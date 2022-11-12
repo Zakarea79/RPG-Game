@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
 				_HP -= value;
 				Invoke("truedmg" , .1f);
 			}
-			if(_HP < 0)
+			if(_HP <= 0)
 			{
 				_HP = 0;
 				print("Play Die Animtion");
