@@ -63,15 +63,15 @@ public class Player : MonoBehaviour
 		//------------------------------------------Debug-----------------------------------------------------------------------
 		if(ZInput.GetKeyDown("attak") && StatuseAnimitonAttack())
 		{
-			animPlayer.SetInteger("Attak" , Random.Range(1 , 4));
+			animPlayer.SetInteger("Attak" , Random.Range(1 , 3));
 		}
 		else if(ZInput.GetKeyDown("battak") && StatuseAnimitonAttack())
 		{
-			animPlayer.SetInteger("Attak" , 4);
+			animPlayer.SetInteger("Attak" , 3);
 		}
 		else if(ZInput.GetKeyDown("cattak") && StatuseAnimitonAttack())
 		{
-			animPlayer.SetInteger("Attak" , 5);
+			animPlayer.SetInteger("Attak" , 4);
 		}
 		
 		animPlayer.applyRootMotion = ChackPlayAnim("attak3");
@@ -99,15 +99,27 @@ public class Player : MonoBehaviour
 	
 	public void SetJumpControl(int statuse){JumpControl = System.Convert.ToBoolean(statuse);if(JumpControl == true) jumpspeed = 2;}
     
-	public void reseatattak(){animPlayer.SetInteger("Attak" , 0);}
+	public void resevarable(string statename){animPlayer.SetInteger(statename , 0);}
     
 	private bool ChackPlayAnim(string name){return animPlayer.GetCurrentAnimatorStateInfo(0).IsName(name);}
     
 	private bool StatuseAnimitonAttack()
 	{
-		for (int i = 0; i < 4; i++) 
+		for (int i = 1; i < 5; i++) 
 		{
 			if(ChackPlayAnim("attak" + i) == true)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private bool StatuseAnimitonDamage()
+	{
+		for (int i = 1; i < 4; i++) 
+		{
+			if(ChackPlayAnim("Damage" + i) == true)
 			{
 				return false;
 			}

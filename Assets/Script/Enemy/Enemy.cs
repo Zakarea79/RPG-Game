@@ -43,5 +43,6 @@ public class Enemy : MonoBehaviour
 	protected void Update()
 	{
 		HPBAR.position = transform.position + Destance;
+		//HPBAR.LookAt(Camera.main.transform.position);
 	}
 }
