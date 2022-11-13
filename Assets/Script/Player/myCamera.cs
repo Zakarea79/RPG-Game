@@ -8,17 +8,25 @@ public class myCamera : MonoBehaviour
 	[SerializeField] private Vector3 RoaCamera;
 	[SerializeField] private Transform Player;
 	[SerializeField] private Material GlassMaterial;
+
+	private Transform Look;
 	private GameObject UseGlassMateral;
 	private Material DefultMaterial;
-	
+	RaycastHit hit;
+
+	private void Awake() {
+		Look = transform.GetChild(0).transform;
+	}
     void Update()
     {
 	    transform.position = Vector3.Lerp(transform.position , Player.position + PosCamera , .1f);
-	    transform.LookAt(Player.position + RoaCamera);
-	    RaycastHit hit;
-	    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
+		Look.position = transform.position;
+	    Look.LookAt(Player.position + RoaCamera);
+	    if (Physics.Raycast(Look.position, Look.TransformDirection(Vector3.forward), out hit))
 	    {
-		    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+			#if UNITY_EDITOR
+		    Debug.DrawRay(transform.position, Look.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+			#endif
 		    if(hit.transform.name != "Player")
 		    {
 		    	if(UseGlassMateral != hit.transform.gameObject)

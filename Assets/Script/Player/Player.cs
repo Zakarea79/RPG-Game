@@ -7,16 +7,17 @@ public class Player : MonoBehaviour
 	[SerializeField] private float Speed = 10f;
 	[SerializeField] private Animator animPlayer;
 	
-	
-	[SerializeField] GameObject test;
-	
 	public float LenSword = .5f;
 	private float jumpspeed = -2;
 	private Vector3 JumpBase;
 	private CharacterController characterController;
 	private bool JumpControl = false;
 	internal bool AttakAction = false;
-	
+	//--------------------------------
+	private RaycastHit hit;
+	#if UNITY_EDITOR
+	private RaycastHit hitDebug;
+	#endif
 	protected void Start()
 	{
 		characterController = gameObject.GetComponent<CharacterController>();
@@ -46,21 +47,21 @@ public class Player : MonoBehaviour
 		if (ZInput.GetKeyDown("jump") && JumpControl == false)
 		{
 			animPlayer.SetTrigger("normalJamp");
-			RaycastHit hit;
 			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
 			{
 				JumpBase = hit.point;
-				Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.green);
+				// Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.green);
 				//print(hit.transform.name);
 			}
 		}
+		#if UNITY_EDITOR
 		//------------------------------------------Debug-----------------------------------------------------------------------
-		RaycastHit hitDebug;
 		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hitDebug))
 		{
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hitDebug.distance, Color.green);
 		}
 		//------------------------------------------Debug-----------------------------------------------------------------------
+		#endif
 		if(ZInput.GetKeyDown("attak") && StatuseAnimitonAttack())
 		{
 			animPlayer.SetInteger("Attak" , Random.Range(1 , 3));
