@@ -4,21 +4,33 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-	Player player;
-	private RaycastHit hit;
+    Player player;
+    [SerializeField] Vector3 vect;
+    // private RaycastHit hit;
     void Start()
     {
-	    player = GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
-	protected void FixedUpdate()
-	{
-		Debug.DrawRay(transform.position , transform.TransformDirection(Vector3.right) * player.LenSword, Color.red);
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right) , out hit , player.LenSword))
-		{	
-			if(player.AttakAction && hit.transform.CompareTag("Enemy"))
-			{
-				hit.transform.GetComponent<Enemy>().HP = 10;
-			}
-	    }
+    protected void FixedUpdate()
+    {
+	    DrawRay(Vector3.left, Vector3.right, new Vector3(0, 0, 1), new Vector3(0, 0, -1));
+    }
+    private void DrawRay(params Vector3[] roate)
+    {
+        RaycastHit hitv;
+        foreach (var item in roate)
+        {
+			#if UNITY_EDITOR
+            Debug.DrawRay(transform.position, transform.TransformDirection(item) * player.LenSword, Color.red);
+			#endif
+            if (Physics.Raycast(transform.position, transform.TransformDirection(item), out hitv, player.LenSword))
+            {
+                if (player.AttakAction && hitv.transform.CompareTag("Enemy"))
+                {
+                    hitv.transform.GetComponent<Enemy>().HP = 10;
+                    break;
+                }
+            }
+        }
     }
 }

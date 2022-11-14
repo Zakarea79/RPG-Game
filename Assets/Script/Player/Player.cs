@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
 		}
 		
 		animPlayer.applyRootMotion = ChackPlayAnim("attak3");
-		AttakAction = StatuseAnimitonAttack() == false ? true : false;
+		AttakAction = StatuseAnimitonAttack() == false && ChackPlayAnim("attak4") == false ? true : false;
 		
 		if(Vector3.Distance(new Vector3(0 , JumpBase.y ,0) , new Vector3(0 , transform.position.y , 0)) > 3)
 		{

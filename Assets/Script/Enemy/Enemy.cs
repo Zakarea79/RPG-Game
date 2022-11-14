@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+	private bool dmg = true;
 	internal bool Live = true;
+	private CharacterController EnemyController;
+	[SerializeField] private float Speed = 5;
 	[SerializeField] private Transform HPBAR;
 	[SerializeField] private Vector3 Destance;
 	[Range(10 , 1000)][SerializeField] private int _HP = 100;
 	[Range(.1f ,10f)][SerializeField] private float section = 1;
-	private bool dmg = true;
+	
 	public int HP
 	{
 		set
@@ -39,10 +42,11 @@ public class Enemy : MonoBehaviour
 	{
 		Live = true;
 		HPBAR = Instantiate(HPBAR , transform.position, transform.rotation);
+		EnemyController = gameObject.GetComponent<CharacterController>();
 	}
 	protected void Update()
 	{
 		HPBAR.position = transform.position + Destance;
-		//HPBAR.LookAt(Camera.main.transform.position);
+		EnemyController.Move((new Vector3(0 , -1 , 0) * Speed * Time.deltaTime));
 	}
 }
