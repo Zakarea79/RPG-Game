@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1895555490271006053}
+  - component: {fileID: 9512608221178136}
   m_Layer: 0
   m_Name: NormalTree_5
   m_TagString: Untagged
@@ -31,6 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9512608221178136
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226541506732840927}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.35944366, y: 2.8837688, z: 0.28827095}
+  m_Center: {x: -0.062275887, y: 1.4311978, z: 0}
 --- !u!1 &7820578681670479622
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +104,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ba9a196dbf542a44c93e5676750dceb2, type: 2}
+  - {fileID: 2100000, guid: 8d109cf2366d320479491962b62287cf, type: 2}
   - {fileID: 2100000, guid: 1bc995163c3e9c34d9063dffb1e588c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
