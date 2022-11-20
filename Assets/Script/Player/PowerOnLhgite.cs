@@ -6,7 +6,8 @@ public class PowerOnLhgite : MonoBehaviour
 {
 	protected void OnTriggerEnter(Collider other)
 	{
-		if(other.CompareTag("Enemy"))
-			other.GetComponent<Enemy>().HP = 30;
+		Enemy enemy;
+		if(other.CompareTag("Enemy") && other.transform.TryGetComponent<Enemy>(out enemy))
+			enemy.HP = 30;
 	}
 }

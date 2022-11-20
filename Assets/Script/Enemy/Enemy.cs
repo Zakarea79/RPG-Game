@@ -49,6 +49,9 @@ public class Enemy : MonoBehaviour
 	protected void Update()
 	{
 		HPBAR.position = transform.position + Destance;
-		navMeshAgent.destination = player.position;
+		if(Vector3.Distance(transform.position , player.position) < 5)
+		{
+			navMeshAgent.destination = player.position;
+		}
 	}
 }
