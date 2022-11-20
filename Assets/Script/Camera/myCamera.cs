@@ -14,7 +14,7 @@ public class myCamera : MonoBehaviour
     {
 		Look.position = transform.position;
 		Look.transform.LookAt(Player.position + RoaCamera);
-	    Look.localScale = new Vector3(.01f , .01f , Vector3.Distance(Player.position , Look.position));
+	    Look.localScale = new Vector3(.001f , .001f , Vector3.Distance(Player.position , Look.position));
 
 	    transform.position = Vector3.Lerp(transform.position , Player.position + PosCamera , .1f);
 	    
