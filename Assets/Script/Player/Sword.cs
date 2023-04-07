@@ -27,8 +27,8 @@ public class Sword : MonoBehaviour
             {
             	Enemy enemy;
 	            if (player.AttakAction && hitv.transform.CompareTag("Enemy") && 
-		            hitv.transform.TryGetComponent<Enemy>(out enemy))
-                {
+		            hitv.transform.TryGetComponent<Enemy>(out enemy) && hitv.collider.isTrigger == false)
+	            {
 		            enemy.HP = 10;
                     break;
                 }

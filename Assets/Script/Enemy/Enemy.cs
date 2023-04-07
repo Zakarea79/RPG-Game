@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private Vector3 Destance;
 	[Range(10 , 1000)][SerializeField] private int _HP = 100;
 	[Range(.1f ,10f)][SerializeField] private float section = 1;
-	[SerializeField] private NavMeshAgent navMeshAgent;
+	[SerializeField] private NavMeshAgent nav;
 	private Transform player;
 	public int HP
 	{
@@ -43,15 +43,31 @@ public class Enemy : MonoBehaviour
 	{
 		Live = true;
 		HPBAR = Instantiate(HPBAR , transform.position, transform.rotation);
-		navMeshAgent = GetComponent<NavMeshAgent>();
+		HPBAR.position = transform.position + Destance;
+		HPBAR.SetParent(transform);
 		player = GameObject.Find("Player").transform;
 	}
+	
+	// Update is called every frame, if the MonoBehaviour is enabled.
 	protected void Update()
 	{
-		HPBAR.position = transform.position + Destance;
-		if(Vector3.Distance(transform.position , player.position) < 5)
+		if(Vector3.Distance(transform.position , player.transform.position) < 5)
 		{
-			navMeshAgent.destination = player.position;
+			if(Vector3.Distance(transform.position , player.transform.position) > 1.5f)
+			{
+				nav.destination = player.transform.position;
+			}else
+			{
+				nav.destination = transform.position;
+			}
 		}
 	}
+	//protected void OnTriggerStay(Collider other)
+	//{
+	//	if(other.CompareTag("Player") && Vector3.Distance(transform.position , other.transform.position) > 2)
+	//	{
+	//		transform.LookAt(new Vector3(player.position.x , .5f , player.position.z));
+	//		transform.position = Vector3.MoveTowards(new Vector3(transform.position.x , .5f , transform.position.z) , new Vector3(other.transform.position.x , .5f , other.transform.position.z) , .1f);
+	//	}
+	//}
 }

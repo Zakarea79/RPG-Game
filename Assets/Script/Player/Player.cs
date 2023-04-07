@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
 	{
 		JumpControl = ChackPlayAnim("jump normal") == true || ChackPlayAnim("jump acrobat") == true ? true : false;
 		
-		float x  = ZInput.GetAxis("Horizontal");
-		float y  = ZInput.GetAxis("Vertical");
+		float x  = ZInput.GetAxis("Horizontal") == 0 ? Input.GetAxis("Horizontal") : ZInput.GetAxis("Horizontal");
+		float y  = ZInput.GetAxis("Vertical") == 0 ? Input.GetAxis("Vertical") : ZInput.GetAxis("Vertical");
 		//-----------------------------------------------------
 		if(System.Math.Abs(x) > .3)
 			animPlayer.SetFloat("Walk" , System.Math.Abs(x));
@@ -77,7 +77,6 @@ public class Player : MonoBehaviour
 		
 		animPlayer.applyRootMotion = ChackPlayAnim("attak3");
 		AttakAction = StatuseAnimitonAttack() == false && ChackPlayAnim("attak4") == false ? true : false;
-		
 		if(Vector3.Distance(new Vector3(0 , JumpBase.y ,0) , new Vector3(0 , transform.position.y , 0)) > 3)
 		{
 			jumpspeed = -2;

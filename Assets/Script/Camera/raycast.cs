@@ -13,7 +13,9 @@ public class raycast : MonoBehaviour
 		SkinnedMeshRenderer skinnedMeshRenderer;
 		var ListGlas = new List<Material>();
 
-		if(other.name != "Player" && !other.CompareTag("Tree") && !objectRaymat.ContainsKey(other.gameObject) && other.TryGetComponent<MeshRenderer>(out meshRenderer))
+		if(other.name != "Player" && !other.CompareTag("Tree") && 
+			!objectRaymat.ContainsKey(other.gameObject) && 
+			other.TryGetComponent<MeshRenderer>(out meshRenderer))
 		{
 			var list = new List<Material>();
 			list.AddRange(meshRenderer.materials);
@@ -25,7 +27,9 @@ public class raycast : MonoBehaviour
 			}
 			meshRenderer.materials = ListGlas.ToArray();
 		}
-		else if(other.name != "Player" && !other.CompareTag("Tree") && !objectRaymat.ContainsKey(other.gameObject) && other.TryGetComponent<SkinnedMeshRenderer>(out skinnedMeshRenderer))
+		else if(other.name != "Player" && !other.CompareTag("Tree") && 
+			!objectRaymat.ContainsKey(other.gameObject) && 
+			other.TryGetComponent<SkinnedMeshRenderer>(out skinnedMeshRenderer))
 		{
 			var list = new List<Material>();
 			list.AddRange(skinnedMeshRenderer.materials);
@@ -37,7 +41,9 @@ public class raycast : MonoBehaviour
 			}
 			skinnedMeshRenderer.materials = ListGlas.ToArray();
 		}
-		else if (other.name != "Player" && other.CompareTag("Tree") && !objectRaymat.ContainsKey(other.gameObject) && other.TryGetComponent<MeshRenderer>(out meshRenderer)) 
+		else if (other.name != "Player" && other.CompareTag("Tree") && 
+			!objectRaymat.ContainsKey(other.gameObject) && 
+			other.TryGetComponent<MeshRenderer>(out meshRenderer)) 
 		{
 			var list = new List<Material>();
 			list.AddRange(meshRenderer.materials);
