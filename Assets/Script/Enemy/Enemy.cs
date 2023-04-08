@@ -13,7 +13,9 @@ public class Enemy : MonoBehaviour
 	[Range(10 , 1000)][SerializeField] private int _HP = 100;
 	[Range(.1f ,10f)][SerializeField] private float section = 1;
 	[SerializeField] private NavMeshAgent nav;
+	[SerializeField] private Transform[] point;
 	private Transform player;
+	private Animator anim;
 	public int HP
 	{
 		set
@@ -42,26 +44,72 @@ public class Enemy : MonoBehaviour
 	protected void Start()
 	{
 		Live = true;
+		anim = GetComponent<Animator>();
 		HPBAR = Instantiate(HPBAR , transform.position, transform.rotation);
 		HPBAR.position = transform.position + Destance;
 		HPBAR.SetParent(transform);
 		player = GameObject.Find("Player").transform;
 	}
 	
-	// Update is called every frame, if the MonoBehaviour is enabled.
+	private bool findPlayer = false;
+	private Transform pointG , pointback;
+	private float TimerSlip = 0;
 	protected void Update()
 	{
-		if(Vector3.Distance(transform.position , player.transform.position) < 5)
+		if(Vector3.Distance(new Vector3(transform.position.x , 0 , transform.position.z) , new Vector3(player.transform.position.x , 0 , player.transform.position.z)) < 5)
 		{
-			if(Vector3.Distance(transform.position , player.transform.position) > 1.5f)
+			if(Vector3.Distance(new Vector3(transform.position.x , 0 , transform.position.z) , new Vector3(player.transform.position.x , 0 , player.transform.position.z)) > 1.5f)
 			{
 				nav.destination = player.transform.position;
-			}else
+				findPlayer = false;
+				if(anim.GetCurrentAnimatorStateInfo(0).IsName("idel") == false)
+				{
+					anim.SetTrigger("idel");
+				}
+			}
+			else
 			{
-				nav.destination = transform.position;
+				if(findPlayer == false) 
+				{
+					nav.destination = transform.position;
+					findPlayer = true;
+				}
+				if(anim.GetCurrentAnimatorStateInfo(0).IsName("Attak") == false)
+				{
+					anim.SetTrigger("Attak");
+				}
+				
+			}
+		}
+		else
+		{
+			if(pointG == null)
+			{
+				beaeainja:
+				pointG = point[Random.Range(0 , point.Length)];
+				if(pointG == pointback)goto beaeainja;
+				pointback = pointG;
+			}
+			else
+			{
+				if(Vector3.Distance(new Vector3(transform.position.x , 0 , transform.position.z) , new Vector3(pointG.transform.position.x , 0 , pointG.transform.position.z)) <= .1f)
+				{
+					TimerSlip += Time.deltaTime;
+					if((byte)TimerSlip == 3)
+					{
+						pointG = null;
+						TimerSlip = 0;
+					}
+					
+				}
+				else
+				{
+					nav.destination = pointG.position;					
+				}
 			}
 		}
 	}
+	public void Attack(){player.GetComponent<HelsePlayer>().damage = 5;}
 	//protected void OnTriggerStay(Collider other)
 	//{
 	//	if(other.CompareTag("Player") && Vector3.Distance(transform.position , other.transform.position) > 2)

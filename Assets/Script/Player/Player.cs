@@ -29,13 +29,21 @@ public class Player : MonoBehaviour
 			//print(hit.transform.name);
 		}
 	}
-	
+	float x;
+	float y;
     void Update()
 	{
 		JumpControl = ChackPlayAnim("jump normal") == true || ChackPlayAnim("jump acrobat") == true ? true : false;
-		
-		float x  = ZInput.GetAxis("Horizontal") == 0 ? Input.GetAxis("Horizontal") : ZInput.GetAxis("Horizontal");
-		float y  = ZInput.GetAxis("Vertical") == 0 ? Input.GetAxis("Vertical") : ZInput.GetAxis("Vertical");
+		if(ChackPlayAnim("attak3") == false && ChackPlayAnim("attak4") == false)
+		{
+			x = ZInput.GetAxis("Horizontal") == 0 ? Input.GetAxis("Horizontal") : ZInput.GetAxis("Horizontal");
+			y = ZInput.GetAxis("Vertical")   == 0 ? Input.GetAxis("Vertical")   : ZInput.GetAxis("Vertical");
+		}
+		else
+		{
+			x = 0;
+			y = 0;
+		}
 		//-----------------------------------------------------
 		if(System.Math.Abs(x) > .3)
 			animPlayer.SetFloat("Walk" , System.Math.Abs(x));
