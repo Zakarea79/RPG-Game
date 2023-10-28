@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -100,7 +98,7 @@ public class Player : MonoBehaviour
 			Quaternion quaternion = Quaternion.LookRotation(Rotatev);
 			transform.rotation = quaternion;
 		}
-		characterController.Move((new Vector3(-ymove, jumpspeed ,xmove) * Speed * Time.deltaTime));
+		characterController.Move(new Vector3(-ymove, jumpspeed ,xmove) * Speed * Time.deltaTime);
 	}
 	
 	public void FierFlay(int input){ transform.GetChild(5).GetComponent<SphereCollider>().radius = input;}

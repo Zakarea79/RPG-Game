@@ -25,11 +25,12 @@ public class Sword : MonoBehaviour
 			#endif
             if (Physics.Raycast(transform.position, transform.TransformDirection(item), out hitv, player.LenSword))
             {
-            	Enemy enemy;
+            	ai_enemy enemy;
 	            if (player.AttakAction && hitv.transform.CompareTag("Enemy") && 
-		            hitv.transform.TryGetComponent<Enemy>(out enemy) && hitv.collider.isTrigger == false)
+		            hitv.transform.TryGetComponent<ai_enemy>(out enemy) &&
+                    hitv.collider.isTrigger == false && player.AttakAction == true)
 	            {
-		            enemy.HP = 10;
+		            enemy.HPM = 5;
                     break;
                 }
             }

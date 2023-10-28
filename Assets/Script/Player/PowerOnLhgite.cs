@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PowerOnLhgite : MonoBehaviour
 {
+	private Player player;
+	private void Start() {
+		player = GameObject.Find("Player").GetComponent<Player>();
+	}
 	protected void OnTriggerEnter(Collider other)
 	{
-		Enemy enemy;
-		if(other.CompareTag("Enemy") && other.transform.TryGetComponent<Enemy>(out enemy) && other.isTrigger == false)
-			enemy.HP = 30;
+		ai_enemy enemy;
+		if(other.CompareTag("Enemy") && other.transform.TryGetComponent<ai_enemy>(out enemy) && other.isTrigger == false) 
+			enemy.HPM = 500;
 	}
 }

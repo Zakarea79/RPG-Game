@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Enemy
   - Tree
+  - point
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - point
   - Water
   - UI
   - Player
