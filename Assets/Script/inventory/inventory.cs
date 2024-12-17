@@ -47,7 +47,6 @@ public class inventory : MonoBehaviour
 {
 	[SerializeField] private Animator animator_Invet_Panel;
 	[SerializeField] private Button button_invet_Handel;
-	[SerializeField] private Transform ScrollViewContent;
 	public string[] item_id = { "jem", "wood", "sord" };
 	private Inventory_Desine inventory_Desine = new Inventory_Desine();
 	[SerializeField] private RectTransform transform_content;
@@ -71,10 +70,6 @@ public class inventory : MonoBehaviour
 			if (animator_Invet_Panel.GetBool("handel") == false)
 			{
 				animator_Invet_Panel.SetBool("handel", true);
-				for (int i = 0; i < 10; i++)
-				{
-					ScrollViewContent_Additem();
-				}
 			}
 			else
 			{
