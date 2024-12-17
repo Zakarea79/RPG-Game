@@ -3,54 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 public class raycast : MonoBehaviour
 {
-	[SerializeField] private Material GlassMaterial , Feedmaterial;
-	
-	private Dictionary<GameObject , List<Material>> objectRaymat = new Dictionary<GameObject , List<Material>>();
-	
+	[SerializeField] private Material GlassMaterial, Feedmaterial;
+
+	private Dictionary<GameObject, List<Material>> objectRaymat = new Dictionary<GameObject, List<Material>>();
+
 	private void OnTriggerEnter(Collider other)
 	{
 		MeshRenderer meshRenderer;
 		SkinnedMeshRenderer skinnedMeshRenderer;
 		var ListGlas = new List<Material>();
 
-		if(other.name != "Player" && !other.CompareTag("Tree") && 
-			!objectRaymat.ContainsKey(other.gameObject) && 
+		if (other.name != "Player" && !other.CompareTag("Tree") &&
+			!objectRaymat.ContainsKey(other.gameObject) &&
 			other.TryGetComponent<MeshRenderer>(out meshRenderer))
 		{
 			var list = new List<Material>();
 			list.AddRange(meshRenderer.materials);
-			objectRaymat.Add(other.gameObject , list);
-			
-			for (int i = 0; i < meshRenderer.materials.Length; i++) 
+			objectRaymat.Add(other.gameObject, list);
+
+			for (int i = 0; i < meshRenderer.materials.Length; i++)
 			{
 				ListGlas.Add(GlassMaterial);
 			}
 			meshRenderer.materials = ListGlas.ToArray();
 		}
-		else if(other.name != "Player" && !other.CompareTag("Tree") && 
-			!objectRaymat.ContainsKey(other.gameObject) && 
+		else if (other.name != "Player" && !other.CompareTag("Tree") &&
+			!objectRaymat.ContainsKey(other.gameObject) &&
 			other.TryGetComponent<SkinnedMeshRenderer>(out skinnedMeshRenderer))
 		{
 			var list = new List<Material>();
 			list.AddRange(skinnedMeshRenderer.materials);
-			objectRaymat.Add(other.gameObject , list);
-			
-			for (int i = 0; i < skinnedMeshRenderer.materials.Length; i++) 
+			objectRaymat.Add(other.gameObject, list);
+
+			for (int i = 0; i < skinnedMeshRenderer.materials.Length; i++)
 			{
 				ListGlas.Add(GlassMaterial);
 			}
 			skinnedMeshRenderer.materials = ListGlas.ToArray();
 		}
-		else if (other.name != "Player" && other.CompareTag("Tree") && 
-			!objectRaymat.ContainsKey(other.gameObject) && 
-			other.TryGetComponent<MeshRenderer>(out meshRenderer)) 
+		else if (other.name != "Player" && other.CompareTag("Tree") &&
+			!objectRaymat.ContainsKey(other.gameObject) &&
+			other.TryGetComponent<MeshRenderer>(out meshRenderer))
 		{
 			var list = new List<Material>();
 			list.AddRange(meshRenderer.materials);
 			objectRaymat.Add(other.gameObject, list);
 			for (int i = 0; i < meshRenderer.materials.Length; i++)
 			{
-                if (meshRenderer.materials[i].name.Contains("Leaves")) 
+				if (meshRenderer.materials[i].name.Contains("Leaves"))
 				{
 					ListGlas.Add(Feedmaterial);
 					continue;
@@ -61,18 +61,18 @@ public class raycast : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerExit(Collider other) 
+	private void OnTriggerExit(Collider other)
 	{
-		if(objectRaymat.ContainsKey(other.gameObject) && other.name != "Player")// && !other.CompareTag("Tree"))
+		if (objectRaymat.ContainsKey(other.gameObject) && other.name != "Player")
 		{
 			MeshRenderer meshRenderer;
 			SkinnedMeshRenderer skinnedMeshRenderer;
 			var ListGlas = new List<Material>();
-			
-			if(other.TryGetComponent<MeshRenderer>(out meshRenderer))
+
+			if (other.TryGetComponent<MeshRenderer>(out meshRenderer))
 			{
-				
-				for (int i = 0; i < meshRenderer.materials.Length; i++) 
+
+				for (int i = 0; i < meshRenderer.materials.Length; i++)
 				{
 					ListGlas.Add(objectRaymat[other.gameObject][i]);
 				}

@@ -5,22 +5,22 @@ using UnityEngine;
 
 public static class ListButtonData
 {
-    public static Dictionary<string , bool> Button_Press = new Dictionary<string , bool>();
-    public static Dictionary<string , bool> Button_Down = new Dictionary<string , bool>();
-    public static Dictionary<string , bool> Button_Up = new Dictionary<string , bool>();
+    public static Dictionary<string, bool> Button_Press = new Dictionary<string, bool>();
+    public static Dictionary<string, bool> Button_Down = new Dictionary<string, bool>();
+    public static Dictionary<string, bool> Button_Up = new Dictionary<string, bool>();
     //------------------------------------------------------------------------------------
-    public static Dictionary<KeyCode , bool> Button_Press_KeyCode = new Dictionary<KeyCode , bool>();
-    public static Dictionary<KeyCode , bool> Button_Down_KeyCode = new Dictionary<KeyCode , bool>();
-    public static Dictionary<KeyCode , bool> Button_Up_KeyCode = new Dictionary<KeyCode , bool>();
+    public static Dictionary<KeyCode, bool> Button_Press_KeyCode = new Dictionary<KeyCode, bool>();
+    public static Dictionary<KeyCode, bool> Button_Down_KeyCode = new Dictionary<KeyCode, bool>();
+    public static Dictionary<KeyCode, bool> Button_Up_KeyCode = new Dictionary<KeyCode, bool>();
     //-----------------------------------------------------------------------------------
-	public static Dictionary<string , float> Axis = new Dictionary<string , float>();
-	
-	public static Dictionary<string , Vector3> RotationAxis = new Dictionary<string , Vector3>();
+    public static Dictionary<string, float> Axis = new Dictionary<string, float>();
+
+    public static Dictionary<string, Vector3> RotationAxis = new Dictionary<string, Vector3>();
 }
 
 public static class ZInput
 {
-    
+
     public static bool GetKeyDown(string key)
     {
         bool temp = ListButtonData.Button_Down[key];
@@ -60,8 +60,8 @@ public static class ZInput
     }
     //------------------------------------------------
 
-	public static float GetAxis(string NameAxis)
-	{
-		return ListButtonData.Axis[NameAxis];
-	}
+    public static float GetAxis(string NameAxis)
+    {
+        return ListButtonData.Axis[NameAxis];
+    }
 }

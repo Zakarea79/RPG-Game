@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 public class ai_enemy : MonoBehaviour
@@ -102,7 +102,6 @@ public class ai_enemy : MonoBehaviour
 		switch (enemyStatuse)
 		{
 			case EnemyStatuse.home:
-			print("Play Gasht Zani");
 			if(randomPosition.position == Vector3.zero)
 			{
 				CrateRandomPosition();

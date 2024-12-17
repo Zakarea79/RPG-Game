@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Tree
   - point
+  - invent_item
   layers:
   - Default
   - TransparentFX
