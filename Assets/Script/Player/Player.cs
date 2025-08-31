@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
 	[SerializeField] private float Speed = 10f;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
 	}
 	float x;
 	float y;
+	private readonly Vector3 Debug_ray_x = new Vector3(.5f, 0, 0);
+	private readonly Vector3 Debug_ray_y = new Vector3(0, 0, .5f);
 	void Update()
 	{
 		JumpControl = ChackPlayAnim("jump normal") == true || ChackPlayAnim("jump acrobat") == true ? true : false;
@@ -49,10 +52,45 @@ public class Player : MonoBehaviour
 		//-----------------------------------------------------
 		if (ZInput.GetKeyDown("jump") && JumpControl == false)
 		{
+			var best_base_jump = new Vector3[5];
 			animPlayer.SetTrigger("normalJamp");
 			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
 			{
-				JumpBase = hit.point;
+				best_base_jump[0] = hit.point;
+				print(hit.collider.name);
+			}
+			// ------------------------------------------------XXX----------------------------------------------------------------------
+
+			if (Physics.Raycast(transform.position + Debug_ray_x, transform.TransformDirection(Vector3.down), out hit))
+			{
+				best_base_jump[1] = hit.point;
+				print(hit.collider.name);
+			}
+			if (Physics.Raycast(transform.position + -Debug_ray_x, transform.TransformDirection(Vector3.down), out hit))
+			{
+				best_base_jump[2] = hit.point;
+				print(hit.collider.name);
+			}
+			//------------------------------------------------YYY----------------------------------------------------------------------
+			if (Physics.Raycast(transform.position + Debug_ray_y, transform.TransformDirection(Vector3.down), out hit))
+			{
+				best_base_jump[3] = hit.point;
+				print(hit.collider.name);
+			}
+			if (Physics.Raycast(transform.position + -Debug_ray_y, transform.TransformDirection(Vector3.down), out hit))
+			{
+				best_base_jump[4] = hit.point;
+				print(hit.collider.name);
+			}
+
+			JumpBase = best_base_jump[0];
+
+			foreach (var item in best_base_jump)
+			{
+				if (Vector3.Distance(transform.position, item) < Vector3.Distance(transform.position, JumpBase))
+				{
+					JumpBase = item;
+				}
 			}
 		}
 #if UNITY_EDITOR
@@ -60,6 +98,24 @@ public class Player : MonoBehaviour
 		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hitDebug))
 		{
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hitDebug.distance, Color.green);
+		}
+		//------------------------------------------------XXX----------------------------------------------------------------------
+		if (Physics.Raycast(transform.position + Debug_ray_x, transform.TransformDirection(Vector3.down), out hitDebug))
+		{
+			Debug.DrawRay(transform.position + Debug_ray_x, transform.TransformDirection(Vector3.down) * hitDebug.distance, Color.blue);
+		}
+		if (Physics.Raycast(transform.position + -Debug_ray_x, transform.TransformDirection(Vector3.down), out hitDebug))
+		{
+			Debug.DrawRay(transform.position + -Debug_ray_x, transform.TransformDirection(Vector3.down) * hitDebug.distance, Color.red);
+		}
+		//------------------------------------------------YYY----------------------------------------------------------------------
+		if (Physics.Raycast(transform.position + Debug_ray_y, transform.TransformDirection(Vector3.down), out hitDebug))
+		{
+			Debug.DrawRay(transform.position + Debug_ray_y, transform.TransformDirection(Vector3.down) * hitDebug.distance, Color.yellow);
+		}
+		if (Physics.Raycast(transform.position + -Debug_ray_y, transform.TransformDirection(Vector3.down), out hitDebug))
+		{
+			Debug.DrawRay(transform.position + -Debug_ray_y, transform.TransformDirection(Vector3.down) * hitDebug.distance, Color.grey);
 		}
 		//------------------------------------------Debug-----------------------------------------------------------------------
 #endif
