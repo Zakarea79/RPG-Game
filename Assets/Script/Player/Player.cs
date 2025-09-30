@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UIElements;
+
 public class Player : MonoBehaviour
 {
 	[SerializeField] private float Speed = 10f;
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
 	private readonly Vector3 Debug_ray_y = new Vector3(0, 0, .5f);
 	void Update()
 	{
+        
 		JumpControl = ChackPlayAnim("jump normal") == true || ChackPlayAnim("jump acrobat") == true ? true : false;
 		if (ChackPlayAnim("attak3") == false && ChackPlayAnim("attak4") == false)
 		{

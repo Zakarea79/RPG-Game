@@ -1,54 +1,7 @@
-﻿using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-[System.Serializable]
-public class Inventory_Desine
-{
-	[System.Serializable]
-	public class object_einventory
-	{
-		public Sprite image;
-		public string id = null;
-		public int item_size = 0;
-	}
-	public List<object_einventory> inventory = new List<object_einventory>();
-
-	public void add_inventory(object_einventory obj)
-	{
-		if (inventory.Count == 0)
-		{
-			inventory.Add(obj);
-			return;
-		}
-		foreach (var item in inventory)
-		{
-			if (obj.id == item.id)
-			{
-				item.item_size += obj.item_size;
-			}
-			else
-			{
-				inventory.Add(obj);
-			}
-		}
-	}
-	public void Use_inventory_item(string item_id, int Size)
-	{
-		foreach (var item in inventory)
-		{
-			if (item.id == item_id && item.item_size >= Size)
-			{
-				item.item_size -= Size;
-			}
-			if (item.item_size == 0)
-			{
-				inventory.Remove(item);
-			}
-		}
-	}
-}
 public class inventory : MonoBehaviour
 {
 	[SerializeField] private Animator animator_Invet_Panel;
@@ -81,27 +34,30 @@ public class inventory : MonoBehaviour
 			for (int i = 0; i < transform_content.childCount; i++)
 			{
 				Destroy(transform_content.GetChild(i).gameObject);
-				y_transform_content = 100;
-				pos_transform_content = 0;
+				print(animator_Invet_Panel.GetBool("handel"));
 			}
+			y_transform_content = 100;
+			pos_transform_content = 0;
 		}
 	}
 	protected void Start()
 	{
 		button_invet_Handel.onClick.AddListener(() =>
 		{
+			print(inventory_Desine.inventory.Count);
 			if (animator_Invet_Panel.GetBool("handel") == false)
 			{
-				animator_Invet_Panel.SetBool("handel", true);
+				print(inventory_Desine.inventory.Count);
 				foreach (var item in inventory_Desine.inventory)
 				{
+					print("add item");
 					ScrollViewContent_Additem(item.image, item.id, System.Convert.ToString(item.item_size));
 				}
+				animator_Invet_Panel.SetBool("handel", true);
 			}
 			else
 			{
 				animator_Invet_Panel.SetBool("handel", false);
-				
 			}
 		});
 	}

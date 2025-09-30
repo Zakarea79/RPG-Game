@@ -1097,9 +1097,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5541347347306120313, guid: 908cb31031a807e43bbbfe43f79061d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1459892798}
-    - targetCorrespondingSourceObject: {fileID: 5541347347306120313, guid: 908cb31031a807e43bbbfe43f79061d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1459892799}
   m_SourcePrefab: {fileID: 100100000, guid: 908cb31031a807e43bbbfe43f79061d4, type: 3}
 --- !u!1001 &346683048
 PrefabInstance:
@@ -2926,7 +2923,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abea2e54b03d5fea58d664cbbb70dcef, type: 3}
   m_Name: 
@@ -4034,25 +4031,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI_Helse: {fileID: 1083957805}
   Helse: 100
---- !u!114 &1459892799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459892795}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58a3281d47d458e449a3eae9b46c83dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator_Invet_Panel: {fileID: 386521196}
-  button_invet_Handel: {fileID: 593270723}
-  inventory_Desine:
-    inventory: []
-  transform_content: {fileID: 1780831817}
-  Content: {fileID: 6188166105839392079, guid: 59f198cd9dbdd4ea48946dc1a124ad6c, type: 3}
-  buttonAddItem: {fileID: 391069936}
 --- !u!1 &1504841077
 GameObject:
   m_ObjectHideFlags: 0
