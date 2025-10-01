@@ -120,15 +120,15 @@ public class Player : MonoBehaviour
 		}
 		//------------------------------------------Debug-----------------------------------------------------------------------
 #endif
-		if (ZInput.GetKeyDown("attak") && StatuseAnimitonAttack())
+		if (ZInput.GetKeyDown("sowrd_attak") && StatuseAnimitonAttack())
 		{
 			animPlayer.SetInteger("Attak", Random.Range(1, 3));
 		}
-		else if (ZInput.GetKeyDown("battak") && StatuseAnimitonAttack())
+		else if (ZInput.GetKeyDown("sowrd_attak_cercl") && StatuseAnimitonAttack())
 		{
 			animPlayer.SetInteger("Attak", 3);
 		}
-		else if (ZInput.GetKeyDown("cattak") && StatuseAnimitonAttack())
+		else if (ZInput.GetKeyDown("magic_attak") && StatuseAnimitonAttack())
 		{
 			animPlayer.SetInteger("Attak", 4);
 		}

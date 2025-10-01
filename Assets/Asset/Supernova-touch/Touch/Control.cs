@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using static ListButtonData;
 
 public static class ListButtonData
 {
@@ -14,8 +13,6 @@ public static class ListButtonData
     public static Dictionary<KeyCode, bool> Button_Up_KeyCode = new Dictionary<KeyCode, bool>();
     //-----------------------------------------------------------------------------------
     public static Dictionary<string, float> Axis = new Dictionary<string, float>();
-
-    public static Dictionary<string, Vector3> RotationAxis = new Dictionary<string, Vector3>();
 }
 
 public static class ZInput

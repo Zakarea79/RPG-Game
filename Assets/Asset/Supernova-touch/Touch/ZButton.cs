@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class ZButton : MonoBehaviour
 {
     private EventTrigger Et;
-    [SerializeField] private string Keycode;
-    [SerializeField] private KeyCode XKeyCode;
+    public string Keycode;
+    public KeyCode XKeyCode;
     public Color PressColor = new Color32(130, 130, 130, 255), normalColor = new Color32(255, 255, 255, 255);
     public Sprite PressButton, UpButton;
     private Image BaseColor;
