@@ -8,6 +8,7 @@ TagManager:
   - Tree
   - point
   - invent_item
+  - non-player
   layers:
   - Default
   - TransparentFX
