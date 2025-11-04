@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.InteropServices;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -25,8 +26,8 @@ public class Player : MonoBehaviour
 			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.green);
 		}
 	}
-	float x;
-	float y;
+	float x = 0;
+	float y = 0;
 	private readonly Vector3 Debug_ray_x = new Vector3(.5f, 0, 0);
 	private readonly Vector3 Debug_ray_y = new Vector3(0, 0, .5f);
 	void Update()
@@ -140,7 +141,7 @@ public class Player : MonoBehaviour
 		{
 			xmove = x;
 			ymove = y;
-
+			
 			var Rotatev = new Vector3(-y, 0, x);
 			Quaternion quaternion = Quaternion.LookRotation(Rotatev);
 			transform.rotation = quaternion;

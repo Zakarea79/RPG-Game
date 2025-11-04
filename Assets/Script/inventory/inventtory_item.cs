@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class inventtory_item : MonoBehaviour
 {
@@ -27,7 +27,6 @@ public class inventtory_item : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			inventory.buttonAddItem.gameObject.SetActive(false);
-			print("Close Menue Add Item");
 		}
 	}
 }

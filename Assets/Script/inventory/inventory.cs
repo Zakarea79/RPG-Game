@@ -16,7 +16,6 @@ public class inventory : MonoBehaviour
 	{
 		transform_content.sizeDelta = new Vector2(transform_content.sizeDelta.x, y_transform_content);
 		GameObject v = Instantiate(Content, new Vector2(0, 0), transform_content.transform.rotation, transform_content.transform);
-
 		v.GetComponent<RectTransform>().anchoredPosition = (new Vector2(0, -pos_transform_content));
 		v.GetComponent<RectTransform>().offsetMin = new Vector2(0, v.GetComponent<RectTransform>().offsetMin.y);
 		v.GetComponent<RectTransform>().offsetMax = new Vector2(0, v.GetComponent<RectTransform>().offsetMax.y);
@@ -26,7 +25,9 @@ public class inventory : MonoBehaviour
 		y_transform_content += 100;
 		pos_transform_content += 100;
 	}
-
+	void update()
+	{
+	}
 	void remove_all_object_in_inventory()
 	{
 		if (animator_Invet_Panel.GetBool("handel") == false)
@@ -44,10 +45,8 @@ public class inventory : MonoBehaviour
 	{
 		button_invet_Handel.onClick.AddListener(() =>
 		{
-			print(inventory_Desine.inventory.Count);
 			if (animator_Invet_Panel.GetBool("handel") == false)
 			{
-				print(inventory_Desine.inventory.Count);
 				foreach (var item in inventory_Desine.inventory)
 				{
 					print("add item");

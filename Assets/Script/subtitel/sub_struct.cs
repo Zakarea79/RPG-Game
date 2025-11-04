@@ -1,5 +1,4 @@
-// Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 public class dialogs
 {
     public string actor { get; set; }
