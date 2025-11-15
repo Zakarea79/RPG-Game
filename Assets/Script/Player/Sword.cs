@@ -3,7 +3,7 @@
 public class Sword : MonoBehaviour
 {
     Player player;
-    [SerializeField] Vector3 vect;
+    [SerializeField] private Transform Random_pos, lable_hp;
     // private RaycastHit hit;
     void Start()
     {
@@ -30,6 +30,21 @@ public class Sword : MonoBehaviour
                 {
                     enemy.HPM = 5;
                     break;
+                }
+                else if (player.AttakAction && hitv.transform.CompareTag("non-player") &&
+                    hitv.collider.isTrigger == false && player.AttakAction == true)
+                {
+                    if (hitv.transform.tag != "Enemy")
+                    {
+                        hitv.transform.tag = "Enemy";
+                        var ai__enemy = hitv.transform.gameObject.AddComponent<ai_enemy>();
+                        ai__enemy.RandomPos = Random_pos;
+                        ai__enemy.LHP = 1000;
+                        ai__enemy.LableHP = lable_hp;
+                        ai__enemy.LableHPPos = new Vector3(.35f, 1.3f, 0);
+                        hitv.transform.gameObject.AddComponent<UnityEngine.AI.NavMeshAgent>();
+
+                    }
                 }
             }
         }

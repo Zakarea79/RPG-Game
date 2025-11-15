@@ -8,10 +8,10 @@ public class ai_enemy : MonoBehaviour
 	private Vector3 FirstPosition;
 	private float max = 0;
 	private float HPR = 0;
-	[SerializeField] private Transform RandomPos;
-	[SerializeField] private float LHP = 1000;
-	[SerializeField] private Transform LableHP;
-	[SerializeField] private Vector3 LableHPPos;
+	public Transform RandomPos;
+	public float LHP = 1000;
+	public Transform LableHP;
+	public Vector3 LableHPPos;
 
 	public float HPP
 	{

@@ -9,7 +9,7 @@ public class inventory : MonoBehaviour
 	public Inventory_Desine inventory_Desine = new Inventory_Desine();
 	[SerializeField] private RectTransform transform_content;
 	[SerializeField] private GameObject Content;
-	public Button buttonAddItem;
+	public GameObject inventory_panel_show_object;
 	int y_transform_content = 100;
 	int pos_transform_content = 0;
 	private void ScrollViewContent_Additem(Sprite image, string name, string abut)
@@ -24,9 +24,6 @@ public class inventory : MonoBehaviour
 
 		y_transform_content += 100;
 		pos_transform_content += 100;
-	}
-	void update()
-	{
 	}
 	void remove_all_object_in_inventory()
 	{

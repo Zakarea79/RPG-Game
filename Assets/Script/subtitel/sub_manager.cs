@@ -8,30 +8,34 @@ public class sub_manager : MonoBehaviour
 {
 	public sub main_sub = null;
 	private string actor = null;
-	[SerializeField] private TextMeshProUGUI labil , txt_show;
-	[SerializeField] private GameObject panle_show_q , btn_show_q;
-    private void Start()
-    {
-	    main_sub = subManager.load_Sub("sub/sub-en");
-    }
+	[SerializeField] private TextMeshProUGUI labil, txt_show;
+	[SerializeField] private GameObject panle_show_q, btn_show_q;
 	private List<dialog> temp = new List<dialog>();
 	private bool find_non_player = false;
-    protected void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.CompareTag("non-player"))
-        {
-	        temp = subManager.get_dialogs(other.GetComponent<extra_tag>().value, ref main_sub);
-	        actor = other.GetComponent<extra_tag>().value;
-	        if(Application.platform == RuntimePlatform.WindowsPlayer || 
-		        Application.platform == RuntimePlatform.LinuxEditor || 
-		        Application.platform == RuntimePlatform.WindowsEditor)
-	        	labil.gameObject.SetActive(true);
-	        //just for test app remove WindowsPlayer in finale biuld
-        	else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.Android)
-	        	btn_show_q.SetActive(true);
-	        find_non_player = true;
-        }
-    }
+	protected void OnTriggerEnter(Collider other)
+	{
+		if (other.transform.CompareTag("non-player"))
+		{
+			txt_show.text = "";
+			var Extra_tag = other.GetComponent<extra_tag>().value;
+			main_sub = subManager.load_Sub($"sub/{Extra_tag}-en");
+			temp = subManager.get_dialogs(Extra_tag, ref main_sub);
+			actor = Extra_tag;
+			if (Application.platform == RuntimePlatform.WindowsPlayer ||
+				Application.platform == RuntimePlatform.LinuxPlayer
+#if UNITY_EDITOR
+				|| Application.platform == RuntimePlatform.LinuxEditor ||
+				Application.platform == RuntimePlatform.WindowsEditor
+#endif
+				)
+				labil.gameObject.SetActive(true);
+			else if (Application.platform == RuntimePlatform.Android)
+			{
+				btn_show_q.SetActive(true);
+			}
+			find_non_player = true;
+		}
+	}
 	protected void OnTriggerExit(Collider other)
 	{
 		if (other.transform.CompareTag("non-player"))
@@ -41,6 +45,13 @@ public class sub_manager : MonoBehaviour
 			btn_show_q.SetActive(false);
 			panle_show_q.gameObject.SetActive(false);
 			actor = null;
+			txt_show.text = "";
+			if (typeEffect != null)
+			{
+				StopCoroutine(typeEffect);
+				typeEffect = null;
+			}
+
 			remove_all_object_in_panle();
 		}
 	}
@@ -54,7 +65,7 @@ public class sub_manager : MonoBehaviour
 	}
 	protected void Update()
 	{
-		if ((Input.GetKeyDown(KeyCode.F) || ZInput.GetKeyDown("f")) && 
+		if ((Input.GetKeyDown(KeyCode.F) || ZInput.GetKeyDown("f")) &&
 			find_non_player == true && panle_show_q.gameObject.activeSelf == false)
 		{
 			panle_show_q.gameObject.SetActive(true);
@@ -62,7 +73,7 @@ public class sub_manager : MonoBehaviour
 			labil.gameObject.SetActive(false);
 			foreach (var item in main_sub.structure.dialogs)
 			{
-				if(item.actor == actor)
+				if (item.actor == actor)
 				{
 					foreach (var item_actor in item.dialog)
 					{
@@ -73,17 +84,17 @@ public class sub_manager : MonoBehaviour
 			}
 		}
 	}
-	
+
 	[SerializeField] private GameObject Content;
-    [SerializeField] private RectTransform transform_content;
+	[SerializeField] private RectTransform transform_content;
 	int y_transform_content = 20;
 	int pos_transform_content = 0;
-	
-	void remove_all_object_in_panle()
+
+	private void remove_all_object_in_panle()
 	{
 		for (int i = 0; i < transform_content.childCount; i++)
 		{
-				Destroy(transform_content.GetChild(i).gameObject);
+			Destroy(transform_content.GetChild(i).gameObject);
 		}
 		y_transform_content = 20;
 		pos_transform_content = 0;
@@ -99,7 +110,7 @@ public class sub_manager : MonoBehaviour
 		v.GetComponent<RectTransform>().offsetMax = new Vector2(0, v.GetComponent<RectTransform>().offsetMax.y);
 		v.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = d.question;
 		v.GetComponent<info_dialogs>().info = d;
-		v.GetComponent<Button>().onClick.AddListener(()=>
+		v.GetComponent<Button>().onClick.AddListener(() =>
 		{
 			var temp = v.GetComponent<info_dialogs>();
 			if (typeEffect != null)

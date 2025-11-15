@@ -36,17 +36,6 @@
             "lod_to": null
           }
         ]
-      },
-      {
-        "actor": "king",
-        "dialog": [
-          {
-            "id": 1,
-            "question": "How are you today?",
-            "answer": "I'm fine, thank you! Just finished my chores.",
-            "lod_to": null
-          }
-        ]
       }
     ]
   }
